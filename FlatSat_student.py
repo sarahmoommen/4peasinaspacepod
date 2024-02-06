@@ -18,7 +18,7 @@ import time
 import board
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX as LSM6DS
 from adafruit_lis3mdl import LIS3MDL
-from git import Repo
+#from git import Repo
 from picamera2 import Picamera2
 
 #VARIABLES
@@ -31,25 +31,6 @@ i2c = board.I2C()
 accel_gyro = LSM6DS(i2c)
 mag = LIS3MDL(i2c)
 picam2 = Picamera2()
-
-
-def git_push():
-    """
-    This function is complete. Stages, commits, and pushes new images to your GitHub repo.
-    """
-    try:
-        repo = Repo(REPO_PATH)
-        origin = repo.remote('origin')
-        print('added remote')
-        origin.pull()
-        print('pulled changes')
-        repo.git.add(REPO_PATH + FOLDER_PATH)
-        repo.index.commit('New Photo')
-        print('made the commit')
-        origin.push()
-        print('pushed changes')
-    except:
-        print('Couldn\'t upload to git')
 
 
 def img_gen(name):
@@ -79,7 +60,7 @@ def take_photo():
             #NAME
             name = "SarahO"     #First Name, Last Initial  ex. MasonM
             #TAKE PHOTO
-            picam2.capture("/home/pi/Pictures/4peasinapodimg.jpg") #capture the image
+            picam2.capture("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg") #capture the image
             print("Done.")
             #PUSH PHOTO TO GITHUB
            #git_push()
