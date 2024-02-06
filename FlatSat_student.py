@@ -82,7 +82,7 @@ def take_photo():
             picam2.capture("/home/pi/Pictures/4peasinapodimg.jpg") #capture the image
             print("Done.")
             #PUSH PHOTO TO GITHUB
-        
+           #git_push()
         #PAUSE
 
 
