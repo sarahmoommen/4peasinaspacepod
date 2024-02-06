@@ -19,7 +19,7 @@ import board
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX as LSM6DS
 from adafruit_lis3mdl import LIS3MDL
 #from git import Repo
-from picamera2 import Picamera2
+from picamera2 import Picamera2, Preview
 
 #VARIABLES
 THRESHOLD = 1      #Any desired value from the accelerometer
@@ -50,6 +50,10 @@ def take_photo():
     This function is NOT complete. Takes a photo when the FlatSat is shaken.
     Replace psuedocode with your own code.
     """
+    camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
+    picam2.configure(camera_config)
+    picam2.start_preview(Preview.QTGL)
+    picam2.start()
     while True:
         accelx, accely, accelz = accel_gyro.acceleration #Queries for accelerometer values.
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
@@ -62,8 +66,11 @@ def take_photo():
             #NAME
             name = "SarahO"     #First Name, Last Initial  ex. MasonM
             #TAKE PHOTO
-            picam2.capture("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg") #capture the image
+            #picam2.capture("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg") #capture the image
+            picam2.capture_file("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg")
             print("Done.")
+            picam2.stop_preview()
+            picam2.stop()
             #PUSH PHOTO TO GITHUB
            #git_push()
         #PAUSE
