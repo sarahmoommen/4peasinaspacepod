@@ -75,7 +75,7 @@ def take_photo():
         if accel_gyro.acceleration > THRESHOLD :
         print("%0.3f %0.3f %0.3f" % (accelx, accely, accelz)) #Prints the values with 3 decimal places.
             #PAUSE
-            time.sleep(5) 
+            time.sleep(3) 
             #NAME
             name = "SarahO"     #First Name, Last Initial  ex. MasonM
             #TAKE PHOTO
