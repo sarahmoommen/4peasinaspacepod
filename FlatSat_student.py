@@ -10,8 +10,8 @@ The provided functions are only for reference, you do not need to use them.
 You will need to complete the take_photo() function and configure the VARIABLES section
 """
 
-#AUTHOR: 
-#DATE:
+#AUTHOR: 4peasinaspacepod
+#DATE: 2/6/2023
 
 #import libraries
 import time
@@ -50,8 +50,7 @@ def take_photo():
     This function is NOT complete. Takes a photo when the FlatSat is shaken.
     Replace psuedocode with your own code.
     """
-    camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
-    picam2.configure(camera_config)
+    picam2.configure(picam2.create_preview_configuration())
     picam2.start_preview(Preview.QTGL)
     picam2.start()
     while True:
