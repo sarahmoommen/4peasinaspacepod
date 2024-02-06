@@ -53,11 +53,10 @@ def take_photo():
     while True:
         accelx, accely, accelz = accel_gyro.acceleration #Queries for accelerometer values.
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
-        #if accel_gyro.acceleration > THRESHOLD :
-            #print("%0.3f %0.3f %0.3f" % (accelx, accely, accelz)) #Prints the values with 3 decimal places.
-            print("Acceleration [X]: " + str(accelx/1000.0) + " g")
-            print("Acceleration [Y]: " + str(accely/1000.0) + " g")
-            print("Acceleration [Z]: " + str(accelz/1000.0) + " g")
+        accelx=round(accelx, 0)
+        accely=round(accely, 0)
+        accelz=round(accelz, 0)
+        if accelx > THRESHOLD :
             #PAUSE
             time.sleep(3) 
             #NAME
