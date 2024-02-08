@@ -22,7 +22,7 @@ from git import Repo
 from picamera2 import Picamera2
 
 #VARIABLES
-THRESHOLD = 0      #Any desired value from the accelerometer
+THRESHOLD = 1      #Any desired value from the accelerometer
 REPO_PATH = ""     #Your github repo path: ex. /home/pi/FlatSatChallenge
 FOLDER_PATH = ""   #Your image folder path in your GitHub repo: ex. /Images
 
@@ -71,8 +71,19 @@ def take_photo():
     """
     while True:
         accelx, accely, accelz = accel_gyro.acceleration
-
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
+        accelx=round(accelx, 0)
+        accely=round(accely, 0)
+        accelz=round(accelz, 0)
+        if accelx > THRESHOLD :
+            #PAUSE
+            time.sleep(3) 
+            #NAME
+            name = "SarahO"     #First Name, Last Initial  ex. MasonM
+            #TAKE PHOTO
+            picam2.start_and_capture_file("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg")
+            print("Done.")
+            #CHECKS IF READINGS ARE ABOVE THRESHOLD
             #PAUSE
             #name = ""     #First Name, Last Initial  ex. MasonM
             #TAKE PHOTO
