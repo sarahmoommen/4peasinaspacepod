@@ -19,7 +19,7 @@ import board
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX as LSM6DS
 from adafruit_lis3mdl import LIS3MDL
 #from git import Repo
-from picamera2 import Picamera2, Preview
+from picamera2 import Picamera2
 
 #VARIABLES
 THRESHOLD = 1      #Any desired value from the accelerometer
@@ -68,7 +68,6 @@ def take_photo():
             #picam2.capture("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg") #capture the image
             picam2.capture_file("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg")
             print("Done.")
-            picam2.stop_preview()
             picam2.stop()
             #PUSH PHOTO TO GITHUB
            #git_push()
