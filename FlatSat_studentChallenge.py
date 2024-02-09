@@ -10,16 +10,16 @@ The provided functions are only for reference, you do not need to use them.
 You will need to complete the take_photo() function and configure the VARIABLES section
 """
 
-#AUTHOR: 
-#DATE:
+#AUTHOR: Sarah O - 4PeasInASpacePod
+#DATE:2/5/2024
 
 #import libraries
 import time
 import board
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX as LSM6DS
 from adafruit_lis3mdl import LIS3MDL
-from git import Repo
-from picamera2 import Picamera2
+#from git import Repo
+from picamera2 import Picamera2, Preview
 
 #VARIABLES
 THRESHOLD = 1      #Any desired value from the accelerometer
@@ -31,6 +31,7 @@ i2c = board.I2C()
 accel_gyro = LSM6DS(i2c)
 mag = LIS3MDL(i2c)
 picam2 = Picamera2()
+camera_config = picam2.create_preview_configuration()
 
 
 def git_push():
@@ -69,28 +70,34 @@ def take_photo():
     This function is NOT complete. Takes a photo when the FlatSat is shaken.
     Replace psuedocode with your own code.
     """
-    while True:
+    print("start")
+    picam2.configure(camera_config)
+    while THRESHOLD < 3:
         accelx, accely, accelz = accel_gyro.acceleration
         #CHECKS IF READINGS ARE ABOVE THRESHOLD
         accelx=round(accelx, 0)
         accely=round(accely, 0)
         accelz=round(accelz, 0)
         if accelx > THRESHOLD :
+            print("shake")
             #PAUSE
-            time.sleep(3) 
+            picam2.start()
+            time.sleep(2) 
             #NAME
-            name = "SarahO"     #First Name, Last Initial  ex. MasonM
+            #name = "SarahO"     #First Name, Last Initial  ex. MasonM
             #TAKE PHOTO
-            picam2.start_and_capture_file("/home/pi/4peasinaspacepod/Images/4peasinapodimg.jpg")
+            picam2.capture_file("4peasinapodimage.jpg")
             print("Done.")
-            #CHECKS IF READINGS ARE ABOVE THRESHOLD
-            #PAUSE
+            break
+            #CHECKS IF READINGS ARE ABOVE THRESHOLD - Done
+            #PAUSE - Done
             #name = ""     #First Name, Last Initial  ex. MasonM
-            #TAKE PHOTO
+            #TAKE PHOTO - Done
             #PUSH PHOTO TO GITHUB
-        
+        #git_push()
+        #print("git push done")
         #PAUSE
-
+        #time.sleep(5)
 
 def main():
     take_photo()
